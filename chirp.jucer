@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="u314hW" name="chirp" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+  <MAINGROUP id="Mbhn8B" name="chirp">
+    <GROUP id="{CE658FEB-F02A-5DDE-2B7F-60152FD51876}" name="Resources">
+      <GROUP id="{8D549BF1-60E9-F859-E63B-95D3BCD0CC6D}" name="CsoundFiles">
+        <FILE id="qZBAyG" name="test.csd" compile="0" resource="1" file="Resources/CsoundFiles/test.csd"/>
+      </GROUP>
+      <GROUP id="{5437D797-3EF3-9CB6-7B55-C0DAD6BAF916}" name="Fonts">
+        <GROUP id="{D651C947-11A8-5583-2077-55AA453BFD1A}" name="CourierPrime">
+          <FILE id="L5Dq4G" name="CourierPrime-Bold.ttf" compile="0" resource="1"
+                file="Resources/Fonts/CourierPrime/CourierPrime-Bold.ttf"/>
+          <FILE id="VDMSDZ" name="CourierPrime-BoldItalic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/CourierPrime/CourierPrime-BoldItalic.ttf"/>
+          <FILE id="ossYYH" name="CourierPrime-Italic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/CourierPrime/CourierPrime-Italic.ttf"/>
+          <FILE id="u56Yqm" name="CourierPrime-Regular.ttf" compile="0" resource="1"
+                file="Resources/Fonts/CourierPrime/CourierPrime-Regular.ttf"/>
+        </GROUP>
+        <GROUP id="{5112E850-B169-1D1F-871C-314953E24D93}" name="CutiveMono">
+          <FILE id="xrDYKs" name="CutiveMono-Regular.ttf" compile="0" resource="1"
+                file="Resources/Fonts/CutiveMono/CutiveMono-Regular.ttf"/>
+        </GROUP>
+        <GROUP id="{65B4F0EA-69F9-C089-53E5-01463BF850A0}" name="JetBrainsMono">
+          <FILE id="yDQIpO" name="JetBrainsMono-Bold.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Bold.ttf"/>
+          <FILE id="jdlYBm" name="JetBrainsMono-BoldItalic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-BoldItalic.ttf"/>
+          <FILE id="cU9jJJ" name="JetBrainsMono-ExtraBold.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-ExtraBold.ttf"/>
+          <FILE id="Nwc2Ll" name="JetBrainsMono-ExtraBoldItalic.ttf" compile="0"
+                resource="1" file="Resources/Fonts/JetBrainsMono/JetBrainsMono-ExtraBoldItalic.ttf"/>
+          <FILE id="h9c1if" name="JetBrainsMono-ExtraLight.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-ExtraLight.ttf"/>
+          <FILE id="dANED6" name="JetBrainsMono-ExtraLightItalic.ttf" compile="0"
+                resource="1" file="Resources/Fonts/JetBrainsMono/JetBrainsMono-ExtraLightItalic.ttf"/>
+          <FILE id="Dcj4p4" name="JetBrainsMono-Italic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Italic.ttf"/>
+          <FILE id="OktvX2" name="JetBrainsMono-Light.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Light.ttf"/>
+          <FILE id="dHn2Jy" name="JetBrainsMono-LightItalic.ttf" compile="0"
+                resource="1" file="Resources/Fonts/JetBrainsMono/JetBrainsMono-LightItalic.ttf"/>
+          <FILE id="j2BbM1" name="JetBrainsMono-Medium.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Medium.ttf"/>
+          <FILE id="wxWJBW" name="JetBrainsMono-MediumItalic.ttf" compile="0"
+                resource="1" file="Resources/Fonts/JetBrainsMono/JetBrainsMono-MediumItalic.ttf"/>
+          <FILE id="BMSGwx" name="JetBrainsMono-Regular.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Regular.ttf"/>
+          <FILE id="UXKNLc" name="JetBrainsMono-SemiBold.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-SemiBold.ttf"/>
+          <FILE id="JionEP" name="JetBrainsMono-SemiBoldItalic.ttf" compile="0"
+                resource="1" file="Resources/Fonts/JetBrainsMono/JetBrainsMono-SemiBoldItalic.ttf"/>
+          <FILE id="CQ0Yvl" name="JetBrainsMono-Thin.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-Thin.ttf"/>
+          <FILE id="MMgR0l" name="JetBrainsMono-ThinItalic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/JetBrainsMono/JetBrainsMono-ThinItalic.ttf"/>
+        </GROUP>
+        <GROUP id="{1E78C817-349A-7ACE-CA57-BC50F7F579C2}" name="SpaceMono">
+          <FILE id="QjOd7E" name="SpaceMono-Bold.ttf" compile="0" resource="1"
+                file="Resources/Fonts/SpaceMono/SpaceMono-Bold.ttf"/>
+          <FILE id="SF0E0Q" name="SpaceMono-BoldItalic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/SpaceMono/SpaceMono-BoldItalic.ttf"/>
+          <FILE id="PPQfs7" name="SpaceMono-Italic.ttf" compile="0" resource="1"
+                file="Resources/Fonts/SpaceMono/SpaceMono-Italic.ttf"/>
+          <FILE id="n3sFUx" name="SpaceMono-Regular.ttf" compile="0" resource="1"
+                file="Resources/Fonts/SpaceMono/SpaceMono-Regular.ttf"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{D78F85B0-1841-19A9-C4D4-F6BF525D7FA8}" name="Images">
+        <FILE id="SvRG8Z" name="play.png" compile="0" resource="1" file="Resources/Images/play.png"/>
+        <FILE id="hh6goS" name="render.png" compile="0" resource="1" file="Resources/Images/render.png"/>
+        <FILE id="pmIcfQ" name="stop.png" compile="0" resource="1" file="Resources/Images/stop.png"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{B8287F0E-6F5E-C207-3F49-21BA5265E20C}" name="Source">
+      <GROUP id="{399D6452-1CB3-7E50-6888-0AC82E8EDCB9}" name="Utils">
+        <FILE id="UW2pek" name="Enums.h" compile="0" resource="0" file="Source/Utils/Enums.h"/>
+      </GROUP>
+      <GROUP id="{19122A0E-3395-FE6C-A2E2-792F47DC9A13}" name="Listeners">
+        <FILE id="Fhg2cH" name="CustomListener.h" compile="0" resource="0"
+              file="Source/Listeners/CustomListener.h"/>
+      </GROUP>
+      <GROUP id="{69D05236-8CA6-4CDD-4AD0-075841C3A836}" name="Components">
+        <FILE id="qLSJYc" name="CsoundConsoleComponent.cpp" compile="1" resource="0"
+              file="Source/Components/CsoundConsoleComponent.cpp"/>
+        <FILE id="pBjlLd" name="CsoundConsoleComponent.h" compile="0" resource="0"
+              file="Source/Components/CsoundConsoleComponent.h"/>
+        <FILE id="wqLnqV" name="CsoundTextEditor.cpp" compile="1" resource="0"
+              file="Source/Components/CsoundTextEditor.cpp"/>
+        <FILE id="Y7zDCa" name="CsoundTextEditor.h" compile="0" resource="0"
+              file="Source/Components/CsoundTextEditor.h"/>
+        <FILE id="lWDmlu" name="LF.cpp" compile="1" resource="0" file="Source/Components/LF.cpp"/>
+        <FILE id="i1vYeV" name="LF.h" compile="0" resource="0" file="Source/Components/LF.h"/>
+        <FILE id="PPC7Zk" name="MenuBarComponent.cpp" compile="1" resource="0"
+              file="Source/Components/MenuBarComponent.cpp"/>
+        <FILE id="CWgpZO" name="MenuBarComponent.h" compile="0" resource="0"
+              file="Source/Components/MenuBarComponent.h"/>
+        <FILE id="x1shra" name="ToolBarComponent.cpp" compile="1" resource="0"
+              file="Source/Components/ToolBarComponent.cpp"/>
+        <FILE id="g2E0yc" name="ToolBarComponent.h" compile="0" resource="0"
+              file="Source/Components/ToolBarComponent.h"/>
+      </GROUP>
+      <FILE id="g0kmJB" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="me6uau" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="rVIGoF" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2019 targetFolder="Builds/VisualStudio2019" externalLibraries="csound64.lib">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="chirp" headerPath="C:/Program Files/Csound6_x64/include/csound"
+                       libraryPath="C:/Program Files/Csound6_x64/lib"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="chirp" headerPath="C:/Program Files/Csound6_x64/include/csound"
+                       libraryPath="C:/Program Files/Csound6_x64/lib"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2019>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
