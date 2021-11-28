@@ -51,9 +51,10 @@ juce::PopupMenu MenuBarComponent::getMenuForIndex(int topLevelMenuIndex, const j
             menu.addCommandItem(&m_CommandManager, ChirpCommandIDs::Open);
             menu.addCommandItem(&m_CommandManager, ChirpCommandIDs::Save);
             break;
-        case 3:
+        case 3: // Run
             menu.addCommandItem(&m_CommandManager, ChirpCommandIDs::Render);
             menu.addCommandItem(&m_CommandManager, ChirpCommandIDs::Run);
+            menu.addCommandItem(&m_CommandManager, ChirpCommandIDs::Stop);
             break;
     }
 
@@ -85,6 +86,10 @@ void MenuBarComponent::getCommandInfo(juce::CommandID commandId, juce::Applicati
             result.setInfo("Run", "Run the currently opened Csound file.", "Run", 0);
             result.addDefaultKeypress('r', juce::ModifierKeys::commandModifier);
             break;
+        case ChirpCommandIDs::Stop:
+            result.setInfo("Stop", "Stop the currently playing Csound file.", "Run", 0);
+            result.addDefaultKeypress('c', juce::ModifierKeys::commandModifier);
+            break;
     }
 }
 
@@ -104,6 +109,9 @@ bool MenuBarComponent::perform(const InvocationInfo& info)
         case ChirpCommandIDs::Run:
             runCsound();
             return true;
+        case ChirpCommandIDs::Stop:
+            stopCsound();
+            return true;
         default:
             return false;
     }
@@ -111,7 +119,7 @@ bool MenuBarComponent::perform(const InvocationInfo& info)
 
 void MenuBarComponent::getAllCommands(juce::Array<juce::CommandID>& commands)
 {
-    juce::Array<juce::CommandID> c{ ChirpCommandIDs::Open, ChirpCommandIDs::Save, ChirpCommandIDs::Render, ChirpCommandIDs::Run };
+    juce::Array<juce::CommandID> c{ ChirpCommandIDs::Open, ChirpCommandIDs::Save, ChirpCommandIDs::Render, ChirpCommandIDs::Run, ChirpCommandIDs::Stop };
     commands.addArray(c);
 }
 
@@ -138,4 +146,9 @@ void MenuBarComponent::renderCsound()
 void MenuBarComponent::runCsound()
 {
     customBroadcast(ChirpCommandIDs::Run);
+}
+
+void MenuBarComponent::stopCsound()
+{
+    customBroadcast(ChirpCommandIDs::Stop);
 }

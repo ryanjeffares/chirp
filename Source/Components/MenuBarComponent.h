@@ -46,6 +46,7 @@ namespace chirp
             void openFile();
             void renderCsound();
             void runCsound();
+            void stopCsound();
 
             juce::ApplicationCommandManager m_CommandManager;
             std::unique_ptr<juce::MenuBarComponent> m_MenuBar;

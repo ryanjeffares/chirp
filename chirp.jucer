@@ -76,16 +76,18 @@
     <GROUP id="{B8287F0E-6F5E-C207-3F49-21BA5265E20C}" name="Source">
       <GROUP id="{399D6452-1CB3-7E50-6888-0AC82E8EDCB9}" name="Utils">
         <FILE id="UW2pek" name="Enums.h" compile="0" resource="0" file="Source/Utils/Enums.h"/>
+        <FILE id="O5QnvT" name="Functions.cpp" compile="1" resource="0" file="Source/Utils/Functions.cpp"/>
+        <FILE id="FkdhaT" name="Functions.h" compile="0" resource="0" file="Source/Utils/Functions.h"/>
       </GROUP>
       <GROUP id="{19122A0E-3395-FE6C-A2E2-792F47DC9A13}" name="Listeners">
         <FILE id="Fhg2cH" name="CustomListener.h" compile="0" resource="0"
               file="Source/Listeners/CustomListener.h"/>
       </GROUP>
       <GROUP id="{69D05236-8CA6-4CDD-4AD0-075841C3A836}" name="Components">
-        <FILE id="qLSJYc" name="CsoundConsoleComponent.cpp" compile="1" resource="0"
-              file="Source/Components/CsoundConsoleComponent.cpp"/>
-        <FILE id="pBjlLd" name="CsoundConsoleComponent.h" compile="0" resource="0"
-              file="Source/Components/CsoundConsoleComponent.h"/>
+        <FILE id="BwNuSj" name="CsoundConsoleOutputComponent.cpp" compile="1"
+              resource="0" file="Source/Components/CsoundConsoleOutputComponent.cpp"/>
+        <FILE id="cD7cUV" name="CsoundConsoleOutputComponent.h" compile="0"
+              resource="0" file="Source/Components/CsoundConsoleOutputComponent.h"/>
         <FILE id="wqLnqV" name="CsoundTextEditor.cpp" compile="1" resource="0"
               file="Source/Components/CsoundTextEditor.cpp"/>
         <FILE id="Y7zDCa" name="CsoundTextEditor.h" compile="0" resource="0"

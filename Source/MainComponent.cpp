@@ -5,7 +5,7 @@ using namespace chirp::Components;
 
 //==============================================================================
 MainComponent::MainComponent() 
-    : m_ClearOutputOnPlay(false), m_CsoundShouldStop(false)
+    : m_ClearOutputOnPlay(false), m_CsoundShouldStop(false), m_CsoundOutputConsole(this)
 {
     setSize (600, 400);
     m_Csound = new Csound();       
@@ -13,7 +13,7 @@ MainComponent::MainComponent()
     auto b = getLocalBounds();
     auto top = LF::getDefaultLookAndFeel().getDefaultMenuBarHeight();
 
-    m_CsoundOutputConsole.addChangeListener(this);
+    m_CsoundOutputConsole.addCustomListener(this);
     addAndMakeVisible(m_CsoundOutputConsole);    
 
     addAndMakeVisible(m_TextEditor);
@@ -23,8 +23,6 @@ MainComponent::MainComponent()
 
     m_ToolBar.addCustomListener(this);
     addAndMakeVisible(m_ToolBar);
-
-    startTimerHz(60);
 }
 
 MainComponent::~MainComponent()
@@ -42,11 +40,11 @@ void MainComponent::paint (juce::Graphics& g)
 
 void MainComponent::changeListenerCallback(juce::ChangeBroadcaster* broadcaster)
 {
-    if (broadcaster == &m_CsoundOutputConsole)
+    /*if (broadcaster == &m_CsoundOutputConsole)
     {
         auto state = m_ClearOutputOnPlay.load();
         m_ClearOutputOnPlay.store(!state);
-    }
+    }*/
 }
 
 void MainComponent::customListenerCallback(CustomBroadcaster<ChirpCommandIDs>* broadcaster, ChirpCommandIDs option)
@@ -85,18 +83,12 @@ void MainComponent::customListenerCallback(CustomBroadcaster<ChirpCommandIDs>* b
     }
 }
 
-void MainComponent::timerCallback()
+void MainComponent::customListenerCallback(CustomBroadcaster<bool>* broadcaster, bool value)
 {
-    std::string message;
-    /*while (popCsoundOutputMessage(message, std::chrono::milliseconds(1)))
+    if (broadcaster == &m_CsoundOutputConsole)
     {
-        juce::MessageManagerLock mmLock;
-        auto currentText = m_CsoundOutputConsole.getText();
-        currentText += '\n';
-        currentText += juce::String(message);
-        m_CsoundOutputConsole.setText(currentText, false);
-        m_CsoundOutputConsole.moveCaretToEnd();        
-    }*/
+        m_ClearOutputOnPlay.store(value);
+    }
 }
 
 void MainComponent::resized()
@@ -106,8 +98,34 @@ void MainComponent::resized()
 
     m_MenuBar.setBounds(bounds.removeFromTop(top));
     m_ToolBar.setBounds(bounds.removeFromTop(getHeight() / 15));
-    m_TextEditor.setBounds(bounds.removeFromTop(bounds.getHeight() / 3 * 2));
+    m_TextEditor.setBounds(bounds.removeFromTop(bounds.getHeight() / 3 * 2));    
     m_CsoundOutputConsole.setBounds(bounds);
+    m_CsoundOutputConsole.resizeChildren();
+}
+
+juce::String MainComponent::getCsoundConsoleOutput()
+{
+    if (m_Csound != nullptr)
+    {
+        juce::String message = "";
+        auto messageCount = m_Csound->GetMessageCnt();
+
+        if (messageCount == 0)
+        {
+            return message;
+        }
+
+        while (m_Csound->GetMessageCnt() > 0)
+        {
+            juce::String newMessage = m_Csound->GetFirstMessage();
+            message += newMessage;
+            m_Csound->PopFirstMessage();
+        }
+
+        return message;
+    }
+
+    return juce::String();
 }
 
 void MainComponent::displayNewCsoundFile(juce::File csoundFile)
@@ -128,6 +146,7 @@ void MainComponent::saveCsoundFile()
 
 void MainComponent::prepareCsoundPlayback(bool run)
 {
+    m_ToolBar.setPlaybackEnabled(false);
     std::thread csoundThread(&MainComponent::performCsound, this, run);
     csoundThread.detach();
 }
@@ -158,14 +177,6 @@ void MainComponent::performCsound(bool run)
         {
             while (m_Csound->PerformKsmps() == 0)
             {
-                while (m_Csound->GetMessageCnt() > 0)
-                {
-                    std::string message = m_Csound->GetFirstMessage();
-                    DBG(message);
-                    pushCsoundOutputMessage(std::move(message));
-                    m_Csound->PopFirstMessage();
-                }
-
                 if (m_CsoundShouldStop.load())
                 {
                     m_Csound->Stop();
@@ -176,13 +187,6 @@ void MainComponent::performCsound(bool run)
     }
 
     m_Csound->Cleanup();
-    // get the final output after score has finished
-    while (m_Csound->GetMessageCnt() > 0)
-    {
-        std::string message = m_Csound->GetFirstMessage();
-        pushCsoundOutputMessage(std::move(message));
-        m_Csound->PopFirstMessage();
-    }    
 
     {
         juce::MessageManagerLock mm;
@@ -190,29 +194,4 @@ void MainComponent::performCsound(bool run)
     }
 
     m_CsoundRunning.store(false);
-}
-
-void MainComponent::pushCsoundOutputMessage(std::string&& message)
-{
-    {
-        std::lock_guard<std::mutex> lock(m_Mutex);
-        m_CsoundOutputMessages.push(std::move(message));
-    }
-
-    m_PopulatedNotifier.notify_one();
-}
-
-bool MainComponent::popCsoundOutputMessage(std::string& message, std::chrono::milliseconds timeout)
-{
-    std::unique_lock<std::mutex> lock(m_Mutex);
-
-    if (!m_PopulatedNotifier.wait_for(lock, timeout, [this] {return !m_CsoundOutputMessages.empty(); }))
-    {
-        return false;
-    }
-
-    message = std::move(m_CsoundOutputMessages.front());
-    m_CsoundOutputMessages.pop();
-
-    return true;
 }

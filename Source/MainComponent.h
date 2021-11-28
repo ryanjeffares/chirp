@@ -4,7 +4,7 @@
 
 #include "csound.hpp"
 
-#include "Components/CsoundConsoleComponent.h"
+#include "Components/CsoundConsoleOutputComponent.h"
 #include "Components/MenuBarComponent.h"
 #include "Components/CsoundTextEditor.h"
 #include "Components/ToolBarComponent.h"
@@ -14,58 +14,60 @@
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent  : public juce::Component, 
-    public juce::Timer, 
-    public juce::ChangeListener,
-    public chirp::CustomListener<chirp::ChirpCommandIDs>
+
+namespace chirp
 {
-public:
-    //==============================================================================
-    MainComponent();
-    ~MainComponent() override;
+    class MainComponent : public juce::Component,
+        public juce::ChangeListener,
+        public chirp::CustomListener<chirp::ChirpCommandIDs>,
+        public chirp::CustomListener<bool>
+    {
+    public:
+        //==============================================================================
+        MainComponent();
+        ~MainComponent() override;
 
-    //==============================================================================
-    void paint (juce::Graphics&) override;
-    void resized() override;
+        //==============================================================================
+        void paint(juce::Graphics&) override;
+        void resized() override;
 
-    void changeListenerCallback(juce::ChangeBroadcaster*) override;
+        void changeListenerCallback(juce::ChangeBroadcaster*) override;
+        void customListenerCallback(chirp::CustomBroadcaster<chirp::ChirpCommandIDs>* broadcaster, chirp::ChirpCommandIDs option) override;
+        void customListenerCallback(chirp::CustomBroadcaster<bool>* broadcaster, bool value) override;
+        juce::String getCsoundConsoleOutput();
 
-    void customListenerCallback(chirp::CustomBroadcaster<chirp::ChirpCommandIDs>* broadcaster, chirp::ChirpCommandIDs option) override;
+        inline Components::MenuBarComponent* getMenuBar() { return &m_MenuBar; }
 
-    void timerCallback() override;
+    private:
+        //==============================================================================
 
-    inline chirp::Components::MenuBarComponent* getMenuBar() { return &m_MenuBar; }
+        void prepareCsoundPlayback(bool run);
 
-private:
-    //==============================================================================
+        void displayNewCsoundFile(juce::File csoundFile);
+        void saveCsoundFile();
 
-    void prepareCsoundPlayback(bool run);
+        void performCsound(bool run);
 
-    void displayNewCsoundFile(juce::File csoundFile);
-    void saveCsoundFile();
+        juce::File m_CurrentCsoundFile;
 
-    void performCsound(bool run);
+        std::unique_ptr<juce::FileChooser> m_FileChooser;
 
-    void pushCsoundOutputMessage(std::string&& message);
-    bool popCsoundOutputMessage(std::string& fileName, std::chrono::milliseconds timeout);
+        Components::MenuBarComponent m_MenuBar;
+        Components::CsoundTextEditor m_TextEditor;
+        Components::CsoundConsoleOutputComponent m_CsoundOutputConsole;
+        Components::ToolBarComponent m_ToolBar;
 
-    juce::File m_CurrentCsoundFile;
+        Csound* m_Csound;
 
-    std::unique_ptr<juce::FileChooser> m_FileChooser;
+        std::atomic_bool m_ClearOutputOnPlay;
+        std::atomic_bool m_CsoundShouldStop;
+        std::atomic_bool m_CsoundRunning;
 
-    chirp::Components::MenuBarComponent m_MenuBar;
-    chirp::Components::CsoundTextEditor m_TextEditor;
-    chirp::Components::CsoundConsoleComponent m_CsoundOutputConsole;    
-    chirp::Components::ToolBarComponent m_ToolBar;
+        std::vector<std::string> m_CsoundOutputMessages;
+        int m_LastDisplayedMessageIndex = 0;
+        std::mutex m_Mutex;
+        std::condition_variable m_PopulatedNotifier;
 
-    Csound* m_Csound;
-
-    std::atomic_bool m_ClearOutputOnPlay;
-    std::atomic_bool m_CsoundShouldStop;
-    std::atomic_bool m_CsoundRunning;
-    std::queue<std::string> m_CsoundOutputMessages;
-    std::mutex m_Mutex;
-    std::condition_variable m_PopulatedNotifier;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
-};
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
+    };
+}

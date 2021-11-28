@@ -65,7 +65,7 @@ public:
         {
             setUsingNativeTitleBar (true);
 
-            auto mc = new MainComponent();
+            auto mc = new chirp::MainComponent();
             addKeyListener(mc->getMenuBar()->getCommandManager()->getKeyMappings());
             setContentOwned (mc, true);
 
